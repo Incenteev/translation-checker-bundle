@@ -2,6 +2,10 @@
 
 This bundle provides you a few CLI commands to check your translations.
 
+[![Build Status](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle.png)](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle)
+[![Latest Stable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/stable.png)](https://packagist.org/packages/incenteev/translation-checker-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/unstable.png)](https://packagist.org/packages/incenteev/translation-checker-bundle)
+
 ## Installation
 
 Installation is a quick (I promise!) 2 step process:
