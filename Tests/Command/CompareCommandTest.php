@@ -3,18 +3,13 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\Command;
 
 use Incenteev\TranslationCheckerBundle\Command\CompareCommand;
-use Prophecy\Prophet;
+use Incenteev\TranslationCheckerBundle\Tests\ProphecyTestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Translation\MessageCatalogue;
 
-class CompareCommandTest extends \PHPUnit_Framework_TestCase
+class CompareCommandTest extends ProphecyTestCase
 {
-    /**
-     * @var Prophet
-     */
-    private $prophet;
-
     /**
      * @dataProvider provideCommandData
      */
@@ -129,15 +124,5 @@ class CompareCommandTest extends \PHPUnit_Framework_TestCase
                 array('1 messages are missing in the test domain', 'Checking the domains other, test'),
             ),
         );
-    }
-
-    protected function setup()
-    {
-        $this->prophet = new Prophet();
-    }
-
-    protected function teardown()
-    {
-        $this->prophet->checkPredictions();
     }
 }

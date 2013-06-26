@@ -11,5 +11,12 @@
                 <argument type="collection" />
             </call>
         </service>
+
+        <service id="incenteev_translation_checker.extractor" alias="incenteev_translation_checker.extractor.symfony" />
+
+        <service id="incenteev_translation_checker.extractor.symfony" class="Incenteev\TranslationCheckerBundle\Translator\Extractor\SymfonyExtractor" public="false">
+            <argument type="service" id="translation.extractor" />
+            <argument>%incenteev_translation_checker.extractor.symfony.paths%</argument>
+        </service>
     </services>
 </container>

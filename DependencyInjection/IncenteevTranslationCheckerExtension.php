@@ -13,5 +13,22 @@ class IncenteevTranslationCheckerExtension extends ConfigurableExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        $dirs = array();
+        $overridePath = '%%kernel.root_dir%%/Resources/%s/views';
+        $registeredBundles = $container->getParameter('kernel.bundles');
+
+        foreach ($config['extraction']['bundles'] as $bundle) {
+            if (!isset($registeredBundles[$bundle])) {
+                throw new \InvalidArgumentException(sprintf('The bundle %s is not registered in the kernel.', $bundle));
+            }
+
+            $reflection = new \ReflectionClass($registeredBundles[$bundle]);
+            $dirs[] = dirname($reflection->getFilename()).'/Resources/views';
+            $dirs[] = sprintf($overridePath, $bundle);
+        }
+        $dirs[] = '%kernel.root_dir%/Resources/views';
+
+        $container->setParameter('incenteev_translation_checker.extractor.symfony.paths', $dirs);
     }
 }
