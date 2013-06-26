@@ -17,6 +17,9 @@
         "symfony/console": "~2.0",
         "symfony/translation": "~2.3"
     },
+    "require-dev": {
+        "phpspec/prophecy": "~1.0"
+    },
     "autoload": {
         "psr-0": { "Incenteev\\TranslationCheckerBundle": "" }
     },
