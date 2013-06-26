@@ -110,6 +110,24 @@ class CompareCommandTest extends \PHPUnit_Framework_TestCase
                 1,
                 array('2 messages are obsolete in the messages domain', '1 messages are missing in the test domain'),
             ),
+            'domain restriction sync' => array(
+                'en',
+                array('messages' => array('foo' => 'bar'), 'test' => array('foo' => 'bar')),
+                'fr',
+                array('messages' => array('foo' => 'baz')),
+                array('locale' => 'fr', '--domain' => array('messages', 'other')),
+                0,
+                array('The fr catalogue is in sync with the en one.', 'Checking the domains messages'),
+            ),
+            'domain restriction missing' => array(
+                'en',
+                array('messages' => array('foo' => 'bar'), 'test' => array('foo' => 'bar')),
+                'fr',
+                array('messages' => array('foo' => 'baz'), 'other' => array('hello' => 'world')),
+                array('locale' => 'fr', '--domain' => array('test', 'other')),
+                1,
+                array('1 messages are missing in the test domain', 'Checking the domains other, test'),
+            ),
         );
     }
 

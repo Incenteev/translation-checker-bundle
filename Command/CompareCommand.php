@@ -5,6 +5,7 @@ namespace Incenteev\TranslationCheckerBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Translation\Catalogue\DiffOperation;
 use Symfony\Component\Translation\MessageCatalogue;
@@ -16,7 +17,21 @@ class CompareCommand extends ContainerAwareCommand
         $this->setName('incenteev:translation:compare')
             ->setDescription('Compares two translation catalogues to ensure they are in sync')
             ->addArgument('locale', InputArgument::REQUIRED, 'The locale being checked')
-            ->addArgument('source', InputArgument::OPTIONAL, 'The source of the comparison', 'en');
+            ->addArgument('source', InputArgument::OPTIONAL, 'The source of the comparison', 'en')
+            ->addOption('domain', 'd', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'The domains being compared')
+            ->setHelp(<<<EOF
+The <info>%command.name%</info> command compares 2 translation catalogues to
+ensure they are in sync. If there is missing keys or obsolete keys in the target
+catalogue, the command will exit with an error code.
+
+When running the command in verbose mode, the translation keys will also be displayed.
+<info>php %command.full_name% fr --verbose</info>
+
+The <info>--domain</info> option allows to restrict the domains being checked.
+It can be specified several times to check several domains. If the option is not passed,
+all domains will be compared.
+EOF
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -31,9 +46,16 @@ class CompareCommand extends ContainerAwareCommand
 
         $operation = new DiffOperation($catalogue, $sourceCatalogue);
 
+        $domains = $operation->getDomains();
+        $restrictedDomains = $input->getOption('domain');
+        if (!empty($restrictedDomains)) {
+            $domains = array_intersect($domains, $restrictedDomains);
+            $output->writeln(sprintf('<comment>Checking the domains %s</comment>', implode(', ', $domains)));
+        }
+
         $valid = true;
 
-        foreach ($operation->getDomains() as $domain) {
+        foreach ($domains as $domain) {
             $missingMessages = $operation->getNewMessages($domain);
             $obsoleteMessages = $operation->getObsoleteMessages($domain);
             $written = false;
