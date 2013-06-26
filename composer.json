@@ -1,0 +1,29 @@
+{
+    "name": "incenteev/translation-checker-bundle",
+    "type": "symfony-bundle",
+    "description": "CLI tools to check translations in a Symfony2 project",
+    "keywords": ["translation check", "translation"],
+    "homepage": "https://github.com/Incenteev/IncenteevTranslationCheckerBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christophe Coevoet",
+            "email": "stof@notk.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "~2.3",
+        "symfony/console": "~2.0",
+        "symfony/translation": "~2.3"
+    },
+    "autoload": {
+        "psr-0": { "Incenteev\\TranslationCheckerBundle": "" }
+    },
+    "target-dir": "Incenteev/TranslationCheckerBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
