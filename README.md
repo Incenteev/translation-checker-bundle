@@ -41,10 +41,16 @@ public function registerBundles()
 
 ### Step 3 (optional): Configure the bundle
 
-To use the commands comparing the
+To use the commands comparing the catalogue to the extracted translations, you
+need to configure the bundles in which the templates should be parsed for translations:
 
 ```yaml
-
+# app/config/config.yml
+incenteev_translation_checker:
+    extraction:
+        bundles:
+            - TwigBundle
+            - AcmeDemoBundle
 ```
 
 ## Usage
