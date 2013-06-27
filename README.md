@@ -39,6 +39,14 @@ public function registerBundles()
 
 > **Warning:** This bundle requires that the translator is enabled in FrameworkBundle.
 
+### Step 3 (optional): Configure the bundle
+
+To use the commands comparing the
+
+```yaml
+
+```
+
 ## Usage
 
 The bundle provides a few CLI commands. To list them all, run:
