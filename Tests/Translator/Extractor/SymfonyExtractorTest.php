@@ -2,9 +2,9 @@
 
 namespace Incenteev\TranslationCheckerBundle\Tests\Translator\Extractor;
 
-use Incenteev\TranslationCheckerBundle\Tests\ProphecyTestCase;
 use Incenteev\TranslationCheckerBundle\Translator\Extractor\SymfonyExtractor;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTestCase;
 use Symfony\Component\Translation\MessageCatalogue;
 
 class SymfonyExtractorTest extends ProphecyTestCase
@@ -13,7 +13,7 @@ class SymfonyExtractorTest extends ProphecyTestCase
 
     public function testExtract()
     {
-        $symfonyExtractor = $this->prophet->prophesize('Symfony\Component\Translation\Extractor\ExtractorInterface');
+        $symfonyExtractor = $this->prophesize('Symfony\Component\Translation\Extractor\ExtractorInterface');
 
         $existingPaths = array(
             $this->workingDir.'/foo',

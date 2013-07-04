@@ -3,7 +3,7 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\Command;
 
 use Incenteev\TranslationCheckerBundle\Command\CompareCommand;
-use Incenteev\TranslationCheckerBundle\Tests\ProphecyTestCase;
+use Prophecy\PhpUnit\ProphecyTestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Translation\MessageCatalogue;
@@ -15,9 +15,9 @@ class CompareCommandTest extends ProphecyTestCase
      */
     public function testExecute($sourceLocale, array $sourceMessages, $comparedLocale, array $comparedMessages, array $input, $expectedExitCode, $expectedMessages, $verbosity = OutputInterface::VERBOSITY_NORMAL)
     {
-        $loader = $this->prophet->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
 
-        $container = $this->prophet->prophesize('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->prophesize('Symfony\Component\DependencyInjection\ContainerInterface');
         $container->get('incenteev_translation_checker.exposing_translator')->willReturn($loader);
 
         $loader->getCatalogue($sourceLocale)->willReturn(new MessageCatalogue($sourceLocale, $sourceMessages));

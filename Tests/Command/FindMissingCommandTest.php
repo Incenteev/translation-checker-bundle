@@ -3,8 +3,8 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\Command;
 
 use Incenteev\TranslationCheckerBundle\Command\FindMissingCommand;
-use Incenteev\TranslationCheckerBundle\Tests\ProphecyTestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Translation\MessageCatalogue;
@@ -16,10 +16,10 @@ class FindMissingCommandTest extends ProphecyTestCase
      */
     public function testExecute($locale, array $sourceMessages, array $extractedMessages, $expectedExitCode, $expectedMessages, $verbosity = OutputInterface::VERBOSITY_NORMAL)
     {
-        $loader = $this->prophet->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
-        $extractor = $this->prophet->prophesize('Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface');
+        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+        $extractor = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface');
 
-        $container = $this->prophet->prophesize('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->prophesize('Symfony\Component\DependencyInjection\ContainerInterface');
         $container->get('incenteev_translation_checker.exposing_translator')->willReturn($loader);
         $container->get('incenteev_translation_checker.extractor')->willReturn($extractor);
 
