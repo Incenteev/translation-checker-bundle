@@ -9,8 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Translation\Translator;
  */
 class ExposingTranslator extends Translator
 {
-    public function getCatalogue($locale)
+    public function getCatalogue($locale = null)
     {
+        if (null === $locale) {
+            $locale = $this->getLocale();
+        }
+
         if (!isset($this->catalogues[$locale])) {
             $this->loadCatalogue($locale);
         }
