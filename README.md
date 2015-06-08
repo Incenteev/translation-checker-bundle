@@ -2,9 +2,11 @@
 
 This bundle provides you a few CLI commands to check your translations.
 
-[![Build Status](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle.png)](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle)
-[![Latest Stable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/stable.png)](https://packagist.org/packages/incenteev/translation-checker-bundle)
-[![Latest Unstable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/unstable.png)](https://packagist.org/packages/incenteev/translation-checker-bundle)
+[![Build Status](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle.svg)](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle)
+[![Latest Stable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/stable.svg)](https://packagist.org/packages/incenteev/translation-checker-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/unstable.svg)](https://packagist.org/packages/incenteev/translation-checker-bundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Incenteev/IncenteevTranslationCheckerBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Incenteev/IncenteevTranslationCheckerBundle/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Incenteev/IncenteevTranslationCheckerBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Incenteev/IncenteevTranslationCheckerBundle/?branch=master)
 
 ## Installation
 
