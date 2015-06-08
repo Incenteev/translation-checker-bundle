@@ -1,9 +1,30 @@
 language: php
+
 php:
     - 5.3
     - 5.4
     - 5.5
+    - 5.6
+    - hhvm
+    - nightly
 
-before_script: composer install --dev
+matrix:
+    include:
+        - php: 5.3
+          env: COMPOSER_FLAGS='--prefer-lowest --prefer-stable'
+    allow_failures:
+        - php: hhvm
+        - php: nightly
 
-script: phpunit --coverage-text
+sudo: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+install: composer update -n $COMPOSER_FLAGS
+
+script: phpunit --coverage-clover=coverage.clover
+
+after_script:
+    - wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover
