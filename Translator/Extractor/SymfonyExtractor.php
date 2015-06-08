@@ -18,7 +18,7 @@ class SymfonyExtractor implements ExtractorInterface
 
     public function extract(MessageCatalogue $catalogue)
     {
-        foreach($this->paths as $path) {
+        foreach ($this->paths as $path) {
             if (!is_dir($path)) {
                 continue;
             }

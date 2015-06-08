@@ -5,7 +5,7 @@ namespace Incenteev\TranslationCheckerBundle\Translator;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 
 /**
- * Class extending the translator to expose the catalogue loading
+ * Class extending the translator to expose the catalogue loading.
  */
 class ExposingTranslator extends Translator
 {
