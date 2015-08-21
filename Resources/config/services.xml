@@ -6,7 +6,6 @@
 
     <services>
         <service id="incenteev_translation_checker.exposing_translator" class="Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator" parent="translator.default">
-            <argument index="3" type="collection" />
             <call method="setFallbackLocales">
                 <argument type="collection" />
             </call>
