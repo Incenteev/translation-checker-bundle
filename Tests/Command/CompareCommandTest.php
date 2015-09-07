@@ -123,6 +123,24 @@ class CompareCommandTest extends ProphecyTestCase
                 1,
                 array('1 messages are missing in the test domain', 'Checking the domains other, test'),
             ),
+            'missing and obsolete message with obsolete only' => array(
+                'en',
+                array('messages' => array('foo' => 'bar'), 'test' => array('hello' => 'world')),
+                'fr',
+                array('messages' => array('foo' => 'bar', 'bar' => 'baz', 'old' => 'one')),
+                array('locale' => 'fr', '--obsolete-only' => true),
+                1,
+                array('2 messages are obsolete in the messages domain'),
+            ),
+            'missing message with obsolete only' => array(
+                'en',
+                array('messages' => array('foo' => 'bar')),
+                'fr',
+                array('messages' => array()),
+                array('locale' => 'fr', '--obsolete-only' => true),
+                0,
+                'The fr catalogue is in sync with the en one.',
+            ),
         );
     }
 }
