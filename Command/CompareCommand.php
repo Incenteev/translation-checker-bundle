@@ -18,6 +18,7 @@ class CompareCommand extends ContainerAwareCommand
             ->setDescription('Compares two translation catalogues to ensure they are in sync')
             ->addArgument('locale', InputArgument::REQUIRED, 'The locale being checked')
             ->addArgument('source', InputArgument::OPTIONAL, 'The source of the comparison', 'en')
+            ->addOption('obsolete-only', null, InputOption::VALUE_NONE, 'Report only obsolete keys')
             ->addOption('domain', 'd', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'The domains being compared')
             ->setHelp(<<<EOF
 The <info>%command.name%</info> command compares 2 translation catalogues to
@@ -53,10 +54,12 @@ EOF
             $output->writeln(sprintf('<comment>Checking the domains %s</comment>', implode(', ', $domains)));
         }
 
+        $checkMissing = !$input->getOption('obsolete-only');
+
         $valid = true;
 
         foreach ($domains as $domain) {
-            $missingMessages = $operation->getNewMessages($domain);
+            $missingMessages = $checkMissing ? $operation->getNewMessages($domain) : array();
             $obsoleteMessages = $operation->getObsoleteMessages($domain);
             $written = false;
 
