@@ -3,11 +3,11 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\Translator\Extractor;
 
 use Incenteev\TranslationCheckerBundle\Translator\Extractor\SymfonyExtractor;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTestCase;
 use Symfony\Component\Translation\MessageCatalogue;
 
-class SymfonyExtractorTest extends ProphecyTestCase
+class SymfonyExtractorTest extends TestCase
 {
     private $workingDir;
 

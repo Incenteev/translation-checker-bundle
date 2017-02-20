@@ -3,13 +3,13 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\Command;
 
 use Incenteev\TranslationCheckerBundle\Command\FindMissingCommand;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Translation\MessageCatalogue;
 
-class FindMissingCommandTest extends ProphecyTestCase
+class FindMissingCommandTest extends TestCase
 {
     /**
      * @dataProvider provideCommandData
