@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Translation\Catalogue\DiffOperation;
+use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
 
 class FindMissingCommand extends ContainerAwareCommand
@@ -37,7 +37,7 @@ HELP
         $loader = $this->getContainer()->get('incenteev_translation_checker.exposing_translator');
         $loadedCatalogue = $loader->getCatalogue($input->getArgument('locale'));
 
-        $operation = new DiffOperation($loadedCatalogue, $extractedCatalogue);
+        $operation = new TargetOperation($loadedCatalogue, $extractedCatalogue);
 
         $valid = true;
 

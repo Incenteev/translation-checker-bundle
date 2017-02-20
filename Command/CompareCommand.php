@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Translation\Catalogue\DiffOperation;
+use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
 
 class CompareCommand extends ContainerAwareCommand
@@ -45,7 +45,7 @@ EOF
         // Change the locale of the catalogue as DiffOperation requires operating on a single locale
         $catalogue = new MessageCatalogue($sourceCatalogue->getLocale(), $comparedCatalogue->all());
 
-        $operation = new DiffOperation($catalogue, $sourceCatalogue);
+        $operation = new TargetOperation($catalogue, $sourceCatalogue);
 
         $domains = $operation->getDomains();
         $restrictedDomains = $input->getOption('domain');
