@@ -3,9 +3,10 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\DependencyInjection;
 
 use Incenteev\TranslationCheckerBundle\DependencyInjection\IncenteevTranslationCheckerExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class IncenteevTranslationCheckerExtensionTest extends \PHPUnit_Framework_TestCase
+class IncenteevTranslationCheckerExtensionTest extends TestCase
 {
     /**
      * @var ContainerBuilder

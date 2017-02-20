@@ -3,12 +3,12 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\Command;
 
 use Incenteev\TranslationCheckerBundle\Command\CompareCommand;
-use Prophecy\PhpUnit\ProphecyTestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Translation\MessageCatalogue;
 
-class CompareCommandTest extends ProphecyTestCase
+class CompareCommandTest extends TestCase
 {
     /**
      * @dataProvider provideCommandData
