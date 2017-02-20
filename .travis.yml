@@ -14,6 +14,11 @@ matrix:
     include:
         - php: 5.3
           env: COMPOSER_FLAGS='--prefer-lowest --prefer-stable' SYMFONY_DEPRECATIONS_HELPER=weak
+        - php: 7.1
+          env: DEPENDENCIES=dev SYMFONY_DEPRECATIONS_HELPER=weak
+        # Test against LTS versions
+        - php: 7.0
+          env: SYMFONY_VERSION=2.8.*
     allow_failures:
         - php: hhvm
         - php: nightly
@@ -23,6 +28,10 @@ sudo: false
 cache:
     directories:
         - $HOME/.composer/cache/files
+
+before_install:
+    - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
+    - if [ "$DEPENDENCIES" = "dev" ]; then perl -pi -e 's/^}$/,"minimum-stability":"dev"}/' composer.json; fi;
 
 install: composer update -n $COMPOSER_FLAGS
 
