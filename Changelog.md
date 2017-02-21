@@ -1,3 +1,8 @@
+## 1.2.0 (2017-02-21)
+
+* Added support for Symfony 3
+* Dropped support for Symfony 2.7 and older
+
 ## 1.1.0 (2015-09-29)
 
 Features:
