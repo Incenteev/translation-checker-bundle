@@ -18,7 +18,7 @@ class ConfigureTranslatorPass implements CompilerPassInterface
         }
 
         $translatorDef = $container->findDefinition('translator.default');
-        $options = $translatorDef->getArgument(3);
+        $options = $translatorDef->getArgument(4);
 
         if (!is_array($options)) {
             // Weird setup. Reset all options
@@ -29,6 +29,6 @@ class ConfigureTranslatorPass implements CompilerPassInterface
         $options['cache_dir'] = '%kernel.cache_dir%/incenteev_translations';
 
         $container->findDefinition('incenteev_translation_checker.exposing_translator')
-            ->replaceArgument(3, $options);
+            ->replaceArgument(4, $options);
     }
 }
