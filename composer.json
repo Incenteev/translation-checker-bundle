@@ -19,8 +19,9 @@
     },
     "require-dev": {
         "symfony/finder": "^2.8 || ^3.0",
-        "symfony/phpunit-bridge": "^3.2",
-        "phpunit/phpunit": "^4.8.35 || ^5.7"
+        "symfony/phpunit-bridge": "^3.3.2",
+        "symfony/yaml": "^2.8 || ^3.0",
+        "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.2"
     },
     "autoload": {
         "psr-4": { "Incenteev\\TranslationCheckerBundle\\": "" }
