@@ -1,3 +1,10 @@
+# 1.3.0 (2017-08-04)
+
+* Added support for chaining multiple extractors. New extractors can be registered using the `incenteev_translation_checker.extractor` tag
+* Added support for autoconfiguration for custom extractors in Symfony 3.3+ (adding the tag implicitly)
+* Added a JS extractor, to extract translation from JS files when using willdurand/js-translation-bundle. See https://github.com/Incenteev/IncenteevTranslationCheckerBundle/pull/18 for current limitations
+* Removed tests and development files from the ZIP archive to make the download smaller.
+
 ## 1.2.1 (2017-06-12)
 
 * Fixed compatibility with Symfony 3.3+
