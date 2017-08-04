@@ -1,7 +1,7 @@
 {
     "name": "incenteev/translation-checker-bundle",
     "type": "symfony-bundle",
-    "description": "CLI tools to check translations in a Symfony2 project",
+    "description": "CLI tools to check translations in a Symfony project",
     "keywords": ["translation check", "translation"],
     "homepage": "https://github.com/Incenteev/IncenteevTranslationCheckerBundle",
     "license": "MIT",
@@ -31,7 +31,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2.x-dev"
+            "dev-master": "1.3.x-dev"
         }
     }
 }
