@@ -11,9 +11,14 @@
             </call>
         </service>
 
-        <service id="incenteev_translation_checker.extractor" alias="incenteev_translation_checker.extractor.symfony" />
+        <service id="incenteev_translation_checker.extractor" alias="incenteev_translation_checker.extractor.chain" />
+
+        <service id="incenteev_translation_checker.extractor.chain" class="Incenteev\TranslationCheckerBundle\Translator\Extractor\ChainExtractor" public="false">
+            <argument type="collection" />
+        </service>
 
         <service id="incenteev_translation_checker.extractor.symfony" class="Incenteev\TranslationCheckerBundle\Translator\Extractor\SymfonyExtractor" public="false">
+            <tag name="incenteev_translation_checker.extractor" />
             <argument type="service" id="translation.extractor" />
             <argument>%incenteev_translation_checker.extractor.symfony.paths%</argument>
         </service>
