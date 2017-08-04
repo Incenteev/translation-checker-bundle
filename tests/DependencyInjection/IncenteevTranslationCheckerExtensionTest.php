@@ -29,6 +29,7 @@ class IncenteevTranslationCheckerExtensionTest extends TestCase
         $extension->load(array(), $this->containerBuilder);
 
         $this->assertParameter(array('%kernel.root_dir%/Resources/views'), 'incenteev_translation_checker.extractor.symfony.paths');
+        $this->assertFalse($this->containerBuilder->hasDefinition('incenteev_translation_checker.extractor.js'));
     }
 
     public function testBundlePaths()
@@ -59,6 +60,38 @@ class IncenteevTranslationCheckerExtensionTest extends TestCase
         $config = array('extraction' => array('bundles' => array('TwigBundle')));
 
         $extension->load(array($config), $this->containerBuilder);
+    }
+
+    public function testJsExtractionPaths()
+    {
+        $extension = new IncenteevTranslationCheckerExtension();
+
+        $config = array('extraction' => array('js' => array('paths' => array('%kernel.project_dir%/web/js'))));
+
+        $extension->load(array($config), $this->containerBuilder);
+
+        $this->assertTrue($this->containerBuilder->hasDefinition('incenteev_translation_checker.extractor.js'));
+
+        $def = $this->containerBuilder->getDefinition('incenteev_translation_checker.extractor.js');
+
+        $this->assertEquals(array('%kernel.project_dir%/web/js'), $def->getArgument(0));
+        $this->assertEquals('messages', $def->getArgument(1));
+    }
+
+    public function testJsExtractionDomain()
+    {
+        $extension = new IncenteevTranslationCheckerExtension();
+
+        $config = array('extraction' => array('js' => array('paths' => array('%kernel.project_dir%/web/js'), 'default_domain' => 'js_messages')));
+
+        $extension->load(array($config), $this->containerBuilder);
+
+        $this->assertTrue($this->containerBuilder->hasDefinition('incenteev_translation_checker.extractor.js'));
+
+        $def = $this->containerBuilder->getDefinition('incenteev_translation_checker.extractor.js');
+
+        $this->assertEquals(array('%kernel.project_dir%/web/js'), $def->getArgument(0));
+        $this->assertEquals('js_messages', $def->getArgument(1));
     }
 
     /**

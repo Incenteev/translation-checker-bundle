@@ -22,5 +22,11 @@
             <argument type="service" id="translation.extractor" />
             <argument>%incenteev_translation_checker.extractor.symfony.paths%</argument>
         </service>
+
+        <service id="incenteev_translation_checker.extractor.js" class="Incenteev\TranslationCheckerBundle\Translator\Extractor\JsExtractor" public="false">
+            <tag name="incenteev_translation_checker.extractor" />
+            <argument type="collection" />
+            <argument />
+        </service>
     </services>
 </container>
