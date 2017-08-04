@@ -36,5 +36,13 @@ class IncenteevTranslationCheckerExtension extends ConfigurableExtension
         $dirs[] = '%kernel.root_dir%/Resources/views';
 
         $container->setParameter('incenteev_translation_checker.extractor.symfony.paths', $dirs);
+
+        if (empty($config['extraction']['js']['paths'])) {
+            $container->removeDefinition('incenteev_translation_checker.extractor.js');
+        } else {
+            $container->getDefinition('incenteev_translation_checker.extractor.js')
+                ->replaceArgument(0, $config['extraction']['js']['paths'])
+                ->replaceArgument(1, $config['extraction']['js']['default_domain']);
+        }
     }
 }

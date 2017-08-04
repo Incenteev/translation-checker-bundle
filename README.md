@@ -55,6 +55,25 @@ incenteev_translation_checker:
             - AcmeDemoBundle
 ```
 
+The bundle also supports extracting translations from JS files, for projects using
+[willdurand/js-translation-bundle](https://packagist.org/packages/willdurand/js-translation-bundle):
+
+```yaml
+# app/config/config.yml
+incenteev_translation_checker:
+    extraction:
+        js:
+            # Paths in which JS files should be checked for translations.
+            # Path could be either for files, or for directories in which JS files should be looked for.
+            # This configuration is required to enable this feature.
+            paths:
+                - '%kernel.project_dir%/web/js'
+                - '%kernel.project_dir%/web/other.js'
+            # The default domain used in your JS translations. Should match the js-translation-bundle configuration
+            # Defaults to 'messages'
+            default_domain: js
+```
+
 ## Usage
 
 The bundle provides a few CLI commands. To list them all, run:
