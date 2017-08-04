@@ -4,7 +4,7 @@ namespace Incenteev\TranslationCheckerBundle\Translator\Extractor;
 
 use Symfony\Component\Translation\MessageCatalogue;
 
-class ChainExtractor implements ExtractorInterface
+final class ChainExtractor implements ExtractorInterface
 {
     private $extractors;
 

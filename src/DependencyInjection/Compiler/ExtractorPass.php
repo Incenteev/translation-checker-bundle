@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class ExtractorPass implements CompilerPassInterface
+final class ExtractorPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
