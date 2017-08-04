@@ -40,7 +40,7 @@ class IncenteevTranslationCheckerExtensionTest extends TestCase
         $extension->load(array($config), $this->containerBuilder);
 
         $expectedPaths = array(
-            dirname(dirname(__DIR__)).'/Resources/views',
+            dirname(dirname(__DIR__)).'/src/Resources/views',
             '%kernel.root_dir%/Resources/IncenteevTranslationCheckerBundle/views',
             '%kernel.root_dir%/Resources/views',
         );
