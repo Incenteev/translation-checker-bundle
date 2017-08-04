@@ -31,6 +31,9 @@ When running the command in verbose mode, the translation keys will also be disp
 The <info>--domain</info> option allows to restrict the domains being checked.
 It can be specified several times to check several domains. If the option is not passed,
 all domains will be compared.
+
+The <info>--obsolete-only</info> option allows to check only obsolete keys, and ignore any
+missing keys.
 EOF
             );
     }

@@ -1,6 +1,7 @@
 # Translation Checker Bundle
 
 This bundle provides you a few CLI commands to check your translations.
+These commands are designed to be usable easily in CI jobs
 
 [![Build Status](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle.svg)](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle)
 [![Latest Stable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/stable.svg)](https://packagist.org/packages/incenteev/translation-checker-bundle)
@@ -20,7 +21,7 @@ Installation is a quick (I promise!) 2 step process:
 Run the following composer require command:
 
 ```bash
-$ composer require incenteev/translation-checker-bundle:dev-master
+$ composer require incenteev/translation-checker-bundle
 ```
 
 ### Step 2: Enable the bundle
@@ -41,10 +42,45 @@ public function registerBundles()
 
 > **Warning:** This bundle requires that the translator is enabled in FrameworkBundle.
 
-### Step 3 (optional): Configure the bundle
+## Usage
+
+The bundle provides a few CLI commands. To list them all, run:
+
+```bash
+$ bin/console list incenteev:translation
+```
+
+All commands display a summary only by default. Run then in verbose mode
+to get a detailed report.
+
+### Finding missing translations
+
+The `incenteev:translation:find-missing` command extracts necessary translations
+from our app source code, and then compare this list to the translation available
+for the tested locale. It will exit with a failure exit code if any missing
+translation is detected.
+
+> **Warning:** Translation extraction will not find all translations used by our app.
+> So while a failure exit code means there is an issue, a success exit code does not
+> guarantee that all translations are available.
+> The recommended usage is to use this command for your reference locale only, and
+> then test other locales by comparing them against the reference instead.
+
+### Comparing translations to a reference locale
+
+The `incenteev:translation:compare` command compares available translations from
+2 different locales and will exit with a failure exit code if catalogues are not
+in sync.
+
+> Note: this command may not work well for country variants of a locale (`fr_FR`).
+> Use it for main locales.
+
+## Configuration
 
 To use the commands comparing the catalogue to the extracted translations, you
-need to configure the bundles in which the templates should be parsed for translations:
+need to configure the bundles in which the templates should be parsed for translations.
+By default, only templates in `app/Resources/views` are registered in the extractor. You
+can register bundles that will be processed too
 
 ```yaml
 # app/config/config.yml
@@ -72,12 +108,4 @@ incenteev_translation_checker:
             # The default domain used in your JS translations. Should match the js-translation-bundle configuration
             # Defaults to 'messages'
             default_domain: js
-```
-
-## Usage
-
-The bundle provides a few CLI commands. To list them all, run:
-
-```bash
-$ php app/console list incenteev:translation
 ```
