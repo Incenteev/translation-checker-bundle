@@ -14,15 +14,12 @@ matrix:
           env: COMPOSER_FLAGS='--prefer-lowest --prefer-stable' SYMFONY_DEPRECATIONS_HELPER=weak
         - php: 7.1
           env: DEPENDENCIES=dev SYMFONY_DEPRECATIONS_HELPER=weak
-        - php: hhvm
-          dist: trusty
         - php: 5.3
           dist: precise
         # Test against LTS versions
         - php: 7.0
           env: SYMFONY_VERSION=2.8.*
     allow_failures:
-        - php: hhvm
         - php: nightly
 
 sudo: false
