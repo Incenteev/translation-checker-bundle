@@ -19,10 +19,6 @@ class FindMissingCommandTest extends TestCase
         $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
         $extractor = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface');
 
-        $container = $this->prophesize('Symfony\Component\DependencyInjection\ContainerInterface');
-        $container->get('incenteev_translation_checker.exposing_translator')->willReturn($loader);
-        $container->get('incenteev_translation_checker.extractor')->willReturn($extractor);
-
         $loader->getCatalogue($locale)->willReturn(new MessageCatalogue($locale, $sourceMessages));
 
         $extractor->extract(Argument::type('Symfony\Component\Translation\MessageCatalogue'))->will(function ($args) use ($extractedMessages) {
@@ -32,8 +28,7 @@ class FindMissingCommandTest extends TestCase
             $catalogue->addCatalogue(new MessageCatalogue($catalogue->getLocale(), $extractedMessages));
         });
 
-        $command = new FindMissingCommand();
-        $command->setContainer($container->reveal());
+        $command = new FindMissingCommand($loader->reveal(), $extractor->reveal());
 
         $tester = new CommandTester($command);
         $exitCode = $tester->execute(array('locale' => $locale), array('decorated' => false, 'verbosity' => $verbosity));

@@ -2,7 +2,8 @@
 
 namespace Incenteev\TranslationCheckerBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -10,8 +11,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
 
-class CompareCommand extends ContainerAwareCommand
+class CompareCommand extends Command
 {
+    private $exposingTranslator;
+
+    public function __construct(ExposingTranslator $exposingTranslator)
+    {
+        parent::__construct();
+
+        $this->exposingTranslator = $exposingTranslator;
+    }
+
     protected function configure()
     {
         $this->setName('incenteev:translation:compare')
@@ -40,10 +50,8 @@ EOF
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $loader = $this->getContainer()->get('incenteev_translation_checker.exposing_translator');
-
-        $sourceCatalogue = $loader->getCatalogue($input->getArgument('source'));
-        $comparedCatalogue = $loader->getCatalogue($input->getArgument('locale'));
+        $sourceCatalogue = $this->exposingTranslator->getCatalogue($input->getArgument('source'));
+        $comparedCatalogue = $this->exposingTranslator->getCatalogue($input->getArgument('locale'));
 
         // Change the locale of the catalogue as DiffOperation requires operating on a single locale
         $catalogue = new MessageCatalogue($sourceCatalogue->getLocale(), $comparedCatalogue->all());

@@ -2,15 +2,27 @@
 
 namespace Incenteev\TranslationCheckerBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator;
+use Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
 
-class FindMissingCommand extends ContainerAwareCommand
+class FindMissingCommand extends Command
 {
+    private $exposingTranslator;
+    private $extractor;
+
+    public function __construct(ExposingTranslator $exposingTranslator, ExtractorInterface $extractor)
+    {
+        parent::__construct();
+        $this->exposingTranslator = $exposingTranslator;
+        $this->extractor = $extractor;
+    }
+
     protected function configure()
     {
         $this->setName('incenteev:translation:find-missing')
@@ -31,11 +43,9 @@ HELP
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $extractedCatalogue = new MessageCatalogue($input->getArgument('locale'));
-        $extractor = $this->getContainer()->get('incenteev_translation_checker.extractor');
-        $extractor->extract($extractedCatalogue);
+        $this->extractor->extract($extractedCatalogue);
 
-        $loader = $this->getContainer()->get('incenteev_translation_checker.exposing_translator');
-        $loadedCatalogue = $loader->getCatalogue($input->getArgument('locale'));
+        $loadedCatalogue = $this->exposingTranslator->getCatalogue($input->getArgument('locale'));
 
         $operation = new TargetOperation($loadedCatalogue, $extractedCatalogue);
 

@@ -21,6 +21,8 @@ matrix:
         # Test against LTS versions
         - php: 7.0
           env: SYMFONY_VERSION=2.8.*
+        - php: 7.1
+          env: SYMFONY_VERSION=3.4.* DEPENDENCIES=dev
     allow_failures:
         - php: hhvm
         - php: nightly
