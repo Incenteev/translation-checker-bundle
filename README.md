@@ -3,11 +3,11 @@
 This bundle provides you a few CLI commands to check your translations.
 These commands are designed to be usable easily in CI jobs
 
-[![Build Status](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle.svg)](https://travis-ci.org/Incenteev/IncenteevTranslationCheckerBundle)
+[![Build Status](https://travis-ci.org/Incenteev/translation-checker-bundle.svg?branch=master)](https://travis-ci.org/Incenteev/translation-checker-bundle)
 [![Latest Stable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/stable.svg)](https://packagist.org/packages/incenteev/translation-checker-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/unstable.svg)](https://packagist.org/packages/incenteev/translation-checker-bundle)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Incenteev/IncenteevTranslationCheckerBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Incenteev/IncenteevTranslationCheckerBundle/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/Incenteev/IncenteevTranslationCheckerBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Incenteev/IncenteevTranslationCheckerBundle/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Incenteev/translation-checker-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Incenteev/translation-checker-bundle/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Incenteev/translation-checker-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Incenteev/translation-checker-bundle/?branch=master)
 
 ## Installation
 
@@ -25,6 +25,8 @@ $ composer require incenteev/translation-checker-bundle
 ```
 
 ### Step 2: Enable the bundle
+
+> **Note:** If you use Flex, you have nothing to do at this step, as Flex does it for you.
 
 Finally, enable the bundle in the kernel:
 
