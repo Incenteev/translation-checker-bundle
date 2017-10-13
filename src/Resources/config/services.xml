@@ -28,5 +28,16 @@
             <argument type="collection" />
             <argument />
         </service>
+
+        <service id="incenteev_translation_checker.command.compare" class="Incenteev\TranslationCheckerBundle\Command\CompareCommand">
+            <tag name="console.command" alias="incenteev:translation:compare" />
+            <argument type="service" id="incenteev_translation_checker.exposing_translator" />
+        </service>
+
+        <service id="incenteev_translation_checker.command.find_missing" class="Incenteev\TranslationCheckerBundle\Command\FindMissingCommand">
+            <tag name="console.command" alias="incenteev:translation:find-missing" />
+            <argument type="service" id="incenteev_translation_checker.exposing_translator" />
+            <argument type="service" id="incenteev_translation_checker.extractor" />
+        </service>
     </services>
 </container>

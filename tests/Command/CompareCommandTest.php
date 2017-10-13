@@ -17,14 +17,10 @@ class CompareCommandTest extends TestCase
     {
         $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
 
-        $container = $this->prophesize('Symfony\Component\DependencyInjection\ContainerInterface');
-        $container->get('incenteev_translation_checker.exposing_translator')->willReturn($loader);
-
         $loader->getCatalogue($sourceLocale)->willReturn(new MessageCatalogue($sourceLocale, $sourceMessages));
         $loader->getCatalogue($comparedLocale)->willReturn(new MessageCatalogue($comparedLocale, $comparedMessages));
 
-        $command = new CompareCommand();
-        $command->setContainer($container->reveal());
+        $command = new CompareCommand($loader->reveal());
 
         $tester = new CommandTester($command);
         $exitCode = $tester->execute($input, array('decorated' => false, 'verbosity' => $verbosity));
