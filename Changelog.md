@@ -1,3 +1,7 @@
+# 1.3.1 (2018-02-20)
+
+* Added support for Symfony 4
+
 # 1.3.0 (2017-08-04)
 
 * Added support for chaining multiple extractors. New extractors can be registered using the `incenteev_translation_checker.extractor` tag
