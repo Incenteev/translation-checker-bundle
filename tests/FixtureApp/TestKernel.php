@@ -25,6 +25,8 @@ class TestKernel extends Kernel
                 'translator' => array('fallback' => 'en'),
                 'secret' => 'test',
             ));
+            // Register a NullLogger to avoid getting the stderr default logger of FrameworkBundle
+            $container->register('logger', 'Psr\Log\NullLogger');
         });
     }
 
