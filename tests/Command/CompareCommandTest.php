@@ -139,4 +139,92 @@ class CompareCommandTest extends TestCase
             ),
         );
     }
+
+    public function testFailsForNonExistentWhitelist()
+    {
+        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+
+        $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('messages' => array('foo' => 'bar'))));
+        $loader->getCatalogue('fr')->willReturn(new MessageCatalogue('fr', array('messages' => array('foo' => 'baz'))));
+
+        $command = new CompareCommand($loader->reveal());
+
+        $tester = new CommandTester($command);
+        $exitCode = $tester->execute(array('locale' => 'fr', '--whitelist-file' => __DIR__.'/../fixtures/non_existent.yml'), array('decorated' => false));
+
+        $this->assertEquals(1, $exitCode);
+
+        $this->assertStringMatchesFormat('%AThe whitelist file "%s" does not exist.%A', $tester->getDisplay());
+    }
+
+    public function testFailsForInvalidWhitelist()
+    {
+        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+
+        $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('messages' => array('foo' => 'bar'))));
+        $loader->getCatalogue('fr')->willReturn(new MessageCatalogue('fr', array('messages' => array('foo' => 'baz'))));
+
+        $command = new CompareCommand($loader->reveal());
+
+        $tester = new CommandTester($command);
+        $exitCode = $tester->execute(array('locale' => 'fr', '--whitelist-file' => __DIR__.'/../fixtures/invalid_whitelist.yml'), array('decorated' => false));
+
+        $this->assertEquals(1, $exitCode);
+
+        $this->assertStringMatchesFormat('%AThe whitelist file "%s" is invalid. It must be a Yaml file containing a map.%A', $tester->getDisplay());
+    }
+
+    public function testSucceedWithWhitelistedMessages()
+    {
+        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+
+        $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('incenteev_tests' => array('foo' => 'bar', 'this key can go missing' => 'not defined in fr'))));
+        $loader->getCatalogue('fr')->willReturn(new MessageCatalogue('fr', array('incenteev_tests' => array('foo' => 'baz', 'this.one.also' => 'obsolete... or no'))));
+
+        $command = new CompareCommand($loader->reveal());
+
+        $tester = new CommandTester($command);
+        $exitCode = $tester->execute(array('locale' => 'fr', '--whitelist-file' => __DIR__.'/../fixtures/whitelist.yml'), array('decorated' => false));
+
+        $this->assertEquals(0, $exitCode);
+    }
+
+    public function testSucceedWithWhitelistedMessagesAndMissingMessage()
+    {
+        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+
+        $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('incenteev_tests' => array(
+            'foo' => 'bar',
+            'this key can go missing' => 'not defined in fr',
+            'this key is required' => 'but missing in fr',
+        ))));
+        $loader->getCatalogue('fr')->willReturn(new MessageCatalogue('fr', array('incenteev_tests' => array('foo' => 'baz', 'this.one.also' => 'obsolete... or no'))));
+
+        $command = new CompareCommand($loader->reveal());
+
+        $tester = new CommandTester($command);
+        $exitCode = $tester->execute(array('locale' => 'fr', '--whitelist-file' => __DIR__.'/../fixtures/whitelist.yml'), array('decorated' => false));
+
+        $this->assertEquals(1, $exitCode);
+
+        $this->assertContains('1 messages are missing in the incenteev_tests domain', $tester->getDisplay());
+    }
+
+    public function testWhitelistIsDomainBased()
+    {
+        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+
+        $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('messages' => array('foo' => 'bar', 'this key can go missing' => 'not defined in fr'))));
+        $loader->getCatalogue('fr')->willReturn(new MessageCatalogue('fr', array('messages' => array('foo' => 'baz', 'this.one.also' => 'obsolete... or no'))));
+
+        $command = new CompareCommand($loader->reveal());
+
+        $tester = new CommandTester($command);
+        $exitCode = $tester->execute(array('locale' => 'fr', '--whitelist-file' => __DIR__.'/../fixtures/whitelist.yml'), array('decorated' => false));
+
+        $this->assertEquals(1, $exitCode);
+
+        $this->assertContains('1 messages are obsolete in the messages domain', $tester->getDisplay());
+        $this->assertContains('1 messages are missing in the messages domain', $tester->getDisplay());
+    }
 }

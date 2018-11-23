@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
+use Symfony\Component\Yaml\Yaml;
 
 class CompareCommand extends Command
 {
@@ -30,6 +31,7 @@ class CompareCommand extends Command
             ->addArgument('source', InputArgument::OPTIONAL, 'The source of the comparison', 'en')
             ->addOption('obsolete-only', null, InputOption::VALUE_NONE, 'Report only obsolete keys')
             ->addOption('domain', 'd', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'The domains being compared')
+            ->addOption('whitelist-file', 'w', InputOption::VALUE_REQUIRED, 'Path to a YAML whitelist file')
             ->setHelp(<<<EOF
 The <info>%command.name%</info> command compares 2 translation catalogues to
 ensure they are in sync. If there is missing keys or obsolete keys in the target
@@ -44,6 +46,10 @@ all domains will be compared.
 
 The <info>--obsolete-only</info> option allows to check only obsolete keys, and ignore any
 missing keys.
+
+The <info>--whitelist-file</info> option allows to define a whitelist of keys which are
+ignored from the comparison (they are never reported as missing or as obsolete). This
+file must be a Yaml file where keys are domains, and values are an array of whitelisted
 EOF
             );
     }
@@ -67,12 +73,37 @@ EOF
 
         $checkMissing = !$input->getOption('obsolete-only');
 
+        $whitelistFile = $input->getOption('whitelist-file');
+        $whitelist = array();
+
+        if (null !== $whitelistFile) {
+            if (!file_exists($whitelistFile)) {
+                $output->writeln(sprintf('<error>The whitelist file "%s" does not exist.</error>', $whitelistFile));
+
+                return 1;
+            }
+
+            $whitelist = Yaml::parse(file_get_contents($whitelistFile));
+
+            if (!is_array($whitelist)) {
+                $output->writeln(sprintf('<error>The whitelist file "%s" is invalid. It must be a Yaml file containing a map.</error>', $whitelistFile));
+
+                return 1;
+            }
+        }
+
         $valid = true;
 
         foreach ($domains as $domain) {
             $missingMessages = $checkMissing ? $operation->getNewMessages($domain) : array();
             $obsoleteMessages = $operation->getObsoleteMessages($domain);
             $written = false;
+
+            if (isset($whitelist[$domain])) {
+                $domainWhitelist = array_flip($whitelist[$domain]);
+                $missingMessages = array_diff_key($missingMessages, $domainWhitelist);
+                $obsoleteMessages = array_diff_key($obsoleteMessages, $domainWhitelist);
+            }
 
             if (!empty($missingMessages)) {
                 $valid = false;
