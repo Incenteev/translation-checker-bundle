@@ -1,3 +1,9 @@
+# 1.4.0 (2018-11-23)
+
+Features:
+
+* Added the `--whitelist-file` option to allow providing a whitelist of keys that should not be considered missing or obsolete. 
+
 # 1.3.1 (2018-02-20)
 
 * Added support for Symfony 4
