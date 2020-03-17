@@ -28,7 +28,22 @@ class IncenteevTranslationCheckerExtensionTest extends TestCase
 
         $extension->load(array(), $this->containerBuilder);
 
-        $this->assertParameter(array('%kernel.root_dir%/Resources/views'), 'incenteev_translation_checker.extractor.symfony.paths');
+        $this->assertParameter(array('%kernel.project_dir%/templates'), 'incenteev_translation_checker.extractor.symfony.paths');
+        $this->assertFalse($this->containerBuilder->hasDefinition('incenteev_translation_checker.extractor.js'));
+    }
+
+    public function testDefaultPathsWithRootDir()
+    {
+        $this->containerBuilder->setParameter('kernel.root_dir', __DIR__);
+
+        $extension = new IncenteevTranslationCheckerExtension();
+
+        $extension->load(array(), $this->containerBuilder);
+
+        $this->assertParameter(array(
+            '%kernel.root_dir%/Resources/views',
+            '%kernel.project_dir%/templates',
+        ), 'incenteev_translation_checker.extractor.symfony.paths');
         $this->assertFalse($this->containerBuilder->hasDefinition('incenteev_translation_checker.extractor.js'));
     }
 
@@ -42,8 +57,29 @@ class IncenteevTranslationCheckerExtensionTest extends TestCase
 
         $expectedPaths = array(
             dirname(dirname(__DIR__)).'/src/Resources/views',
+            '%kernel.project_dir%/templates/bundles/IncenteevTranslationCheckerBundle',
+            '%kernel.project_dir%/templates',
+        );
+
+        $this->assertParameter($expectedPaths, 'incenteev_translation_checker.extractor.symfony.paths');
+    }
+
+    public function testBundlePathsWithRootDir()
+    {
+        $this->containerBuilder->setParameter('kernel.root_dir', __DIR__);
+
+        $extension = new IncenteevTranslationCheckerExtension();
+
+        $config = array('extraction' => array('bundles' => array('IncenteevTranslationCheckerBundle')));
+
+        $extension->load(array($config), $this->containerBuilder);
+
+        $expectedPaths = array(
+            dirname(dirname(__DIR__)).'/src/Resources/views',
             '%kernel.root_dir%/Resources/IncenteevTranslationCheckerBundle/views',
+            '%kernel.project_dir%/templates/bundles/IncenteevTranslationCheckerBundle',
             '%kernel.root_dir%/Resources/views',
+            '%kernel.project_dir%/templates',
         );
 
         $this->assertParameter($expectedPaths, 'incenteev_translation_checker.extractor.symfony.paths');

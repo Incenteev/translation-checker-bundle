@@ -21,7 +21,13 @@ class IncenteevTranslationCheckerExtension extends ConfigurableExtension
         }
 
         $dirs = array();
-        $overridePath = '%%kernel.root_dir%%/Resources/%s/views';
+        $overridePathPatterns = array();
+
+        if ($container->hasParameter('kernel.root_dir')) {
+            $overridePathPatterns[] = '%%kernel.root_dir%%/Resources/%s/views';
+        }
+        $overridePathPatterns[] = '%%kernel.project_dir%%/templates/bundles/%s';
+
         $registeredBundles = $container->getParameter('kernel.bundles');
 
         foreach ($config['extraction']['bundles'] as $bundle) {
@@ -31,9 +37,17 @@ class IncenteevTranslationCheckerExtension extends ConfigurableExtension
 
             $reflection = new \ReflectionClass($registeredBundles[$bundle]);
             $dirs[] = dirname($reflection->getFilename()).'/Resources/views';
-            $dirs[] = sprintf($overridePath, $bundle);
+
+            foreach ($overridePathPatterns as $overridePath) {
+                $dirs[] = sprintf($overridePath, $bundle);
+            }
         }
-        $dirs[] = '%kernel.root_dir%/Resources/views';
+
+        if ($container->hasParameter('kernel.root_dir')) {
+            $dirs[] = '%kernel.root_dir%/Resources/views';
+        }
+
+        $dirs[] = '%kernel.project_dir%/templates';
 
         $container->setParameter('incenteev_translation_checker.extractor.symfony.paths', $dirs);
 
