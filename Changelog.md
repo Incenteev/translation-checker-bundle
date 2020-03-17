@@ -1,8 +1,13 @@
+# 1.5.0 (2020-03-17)
+
+* Added support for Symfony 5
+* Dropped support for unmaintained Symfony and PHP versions.
+
 # 1.4.0 (2018-11-23)
 
 Features:
 
-* Added the `--whitelist-file` option to allow providing a whitelist of keys that should not be considered missing or obsolete. 
+* Added the `--whitelist-file` option to allow providing a whitelist of keys that should not be considered missing or obsolete.
 
 # 1.3.1 (2018-02-20)
 
