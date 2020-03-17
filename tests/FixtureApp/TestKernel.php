@@ -30,6 +30,14 @@ class TestKernel extends Kernel
         });
     }
 
+    public function getProjectDir()
+    {
+        // Fake implementation so that the old root_dir/Resources/translations and the new project_dir/translations both
+        // map to the same folder in our fixture app to avoid getting a deprecation warning when running tests with 4.2+
+        // but keeping compat with running tests on 3.4.
+        return __DIR__.'/Resources';
+    }
+
     public function getCacheDir()
     {
         return sys_get_temp_dir().'/incenteev_translation_checker';

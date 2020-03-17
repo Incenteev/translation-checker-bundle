@@ -7,10 +7,17 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('incenteev_translation_checker')
+        $treeBuilder = new TreeBuilder('incenteev_translation_checker');
+
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            $rootNode = $treeBuilder->root('incenteev_translation_checker');
+        }
+
+        $rootNode
             ->children()
                 ->arrayNode('extraction')
                     ->addDefaultsIfNotSet()
