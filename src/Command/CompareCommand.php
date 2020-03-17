@@ -54,7 +54,7 @@ EOF
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sourceCatalogue = $this->exposingTranslator->getCatalogue($input->getArgument('source'));
         $comparedCatalogue = $this->exposingTranslator->getCatalogue($input->getArgument('locale'));
