@@ -14,11 +14,8 @@ class IncenteevTranslationCheckerExtension extends ConfigurableExtension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        // supports autoconfiguration of extractors in Symfony 3.3+
-        if (method_exists($container, 'registerForAutoconfiguration')) {
-            $container->registerForAutoconfiguration('Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface')
-                ->addTag('incenteev_translation_checker.extractor');
-        }
+        $container->registerForAutoconfiguration('Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface')
+            ->addTag('incenteev_translation_checker.extractor');
 
         $dirs = array();
         $overridePathPatterns = array();

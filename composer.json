@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "CLI tools to check translations in a Symfony project",
     "keywords": ["translation check", "translation"],
-    "homepage": "https://github.com/Incenteev/IncenteevTranslationCheckerBundle",
+    "homepage": "https://github.com/Incenteev/translation-checker-bundle",
     "license": "MIT",
     "authors": [
         {
@@ -13,17 +13,17 @@
     ],
     "require": {
         "php": "^7.4",
-        "symfony/framework-bundle": "^3.4.36 || ^4.3 || ^5.0",
-        "symfony/console": "^3.4.36 || ^4.3 || ^5.0",
-        "symfony/config": "^3.4.36 || ^4.3 || ^5.0",
-        "symfony/dependency-injection": "^3.4.36 || ^4.3 || ^5.0",
-        "symfony/finder": "^3.4.36 || ^4.3 || ^5.0",
-        "symfony/translation": "^3.4.36 || ^4.3 || ^5.0",
-        "symfony/yaml": "^3.4.36 || ^4.3 || ^5.0"
+        "symfony/framework-bundle": "^4.4.29 || ^5.3.4",
+        "symfony/console": "^4.4.29 || ^5.3.4",
+        "symfony/config": "^4.4.29 || ^5.3.4",
+        "symfony/dependency-injection": "^4.4.29 || ^5.3.4",
+        "symfony/finder": "^4.4.29 || ^5.3.4",
+        "symfony/translation": "^4.4.32 || ^5.3.4",
+        "symfony/yaml": "^4.4.29 || ^5.3.4"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.0",
-        "phpunit/phpunit": "^7"
+        "symfony/phpunit-bridge": "^5.3.8",
+        "phpunit/phpunit": "^7.5.20"
     },
     "autoload": {
         "psr-4": { "Incenteev\\TranslationCheckerBundle\\": "src" }
