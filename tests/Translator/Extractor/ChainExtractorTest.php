@@ -4,9 +4,12 @@ namespace Incenteev\TranslationCheckerBundle\Tests\Translator\Extractor;
 
 use Incenteev\TranslationCheckerBundle\Translator\Extractor\ChainExtractor;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class ChainExtractorTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testExtract()
     {
         $extractor1 = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface');

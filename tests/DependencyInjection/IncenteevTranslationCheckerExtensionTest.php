@@ -13,7 +13,7 @@ class IncenteevTranslationCheckerExtensionTest extends TestCase
      */
     private $containerBuilder;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->containerBuilder = new ContainerBuilder();
         $this->containerBuilder->setParameter('kernel.bundles', array(
@@ -85,15 +85,14 @@ class IncenteevTranslationCheckerExtensionTest extends TestCase
         $this->assertParameter($expectedPaths, 'incenteev_translation_checker.extractor.symfony.paths');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The bundle TwigBundle is not registered in the kernel.
-     */
     public function testNotRegisteredBundle()
     {
         $extension = new IncenteevTranslationCheckerExtension();
 
         $config = array('extraction' => array('bundles' => array('TwigBundle')));
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The bundle TwigBundle is not registered in the kernel.');
 
         $extension->load(array($config), $this->containerBuilder);
     }
