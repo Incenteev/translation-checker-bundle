@@ -3,11 +3,10 @@
 This bundle provides you a few CLI commands to check your translations.
 These commands are designed to be usable easily in CI jobs
 
-[![Build Status](https://travis-ci.org/Incenteev/translation-checker-bundle.svg?branch=master)](https://travis-ci.org/Incenteev/translation-checker-bundle)
+[![CI](https://github.com/Incenteev/translation-checker-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/Incenteev/translation-checker-bundle/actions/workflows/ci.yml)
 [![Latest Stable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/stable.svg)](https://packagist.org/packages/incenteev/translation-checker-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/incenteev/translation-checker-bundle/v/unstable.svg)](https://packagist.org/packages/incenteev/translation-checker-bundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Incenteev/translation-checker-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Incenteev/translation-checker-bundle/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/Incenteev/translation-checker-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Incenteev/translation-checker-bundle/?branch=master)
 
 ## Installation
 
@@ -81,8 +80,8 @@ in sync.
 
 To use the commands comparing the catalogue to the extracted translations, you
 need to configure the bundles in which the templates should be parsed for translations.
-By default, only templates in `app/Resources/views` are registered in the extractor. You
-can register bundles that will be processed too
+By default, only templates in `templates` (and `app/Resources/views` on Symfony 4 and older)
+are registered in the extractor. You can register bundles that will be processed too.
 
 ```yaml
 # app/config/config.yml
