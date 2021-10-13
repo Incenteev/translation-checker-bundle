@@ -4,12 +4,15 @@ namespace Incenteev\TranslationCheckerBundle\Tests\Command;
 
 use Incenteev\TranslationCheckerBundle\Command\CompareCommand;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Translation\MessageCatalogue;
 
 class CompareCommandTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @dataProvider provideCommandData
      */
@@ -28,7 +31,7 @@ class CompareCommandTest extends TestCase
         $this->assertEquals($expectedExitCode, $exitCode);
 
         foreach ((array) $expectedMessages as $message) {
-            $this->assertContains($message, $tester->getDisplay());
+            $this->assertStringContainsString($message, $tester->getDisplay());
         }
     }
 
@@ -189,7 +192,7 @@ class CompareCommandTest extends TestCase
         $this->assertEquals(0, $exitCode);
     }
 
-    public function testSucceedWithWhitelistedMessagesAndMissingMessage()
+    public function testFailsWithWhitelistedMessagesAndMissingMessage()
     {
         $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
 
@@ -207,7 +210,7 @@ class CompareCommandTest extends TestCase
 
         $this->assertEquals(1, $exitCode);
 
-        $this->assertContains('1 messages are missing in the incenteev_tests domain', $tester->getDisplay());
+        $this->assertStringContainsString('1 messages are missing in the incenteev_tests domain', $tester->getDisplay());
     }
 
     public function testWhitelistIsDomainBased()
@@ -224,7 +227,7 @@ class CompareCommandTest extends TestCase
 
         $this->assertEquals(1, $exitCode);
 
-        $this->assertContains('1 messages are obsolete in the messages domain', $tester->getDisplay());
-        $this->assertContains('1 messages are missing in the messages domain', $tester->getDisplay());
+        $this->assertStringContainsString('1 messages are obsolete in the messages domain', $tester->getDisplay());
+        $this->assertStringContainsString('1 messages are missing in the messages domain', $tester->getDisplay());
     }
 }

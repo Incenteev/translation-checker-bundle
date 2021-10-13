@@ -10,12 +10,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('incenteev_translation_checker');
-
-        if (method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            $rootNode = $treeBuilder->root('incenteev_translation_checker');
-        }
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()

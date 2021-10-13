@@ -33,7 +33,7 @@ class JsExtractorTest extends TestCase
             )
         );
 
-        $this->assertEquals($expected, $catalogue->all(), '', 0, 10, true);// Order of translations is not relevant for the testing
+        $this->assertEqualsCanonicalizing($expected, $catalogue->all());// Order of translations is not relevant for the testing
     }
 
     public static function providePaths()

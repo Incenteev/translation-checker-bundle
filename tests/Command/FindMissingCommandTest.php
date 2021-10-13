@@ -5,12 +5,15 @@ namespace Incenteev\TranslationCheckerBundle\Tests\Command;
 use Incenteev\TranslationCheckerBundle\Command\FindMissingCommand;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Translation\MessageCatalogue;
 
 class FindMissingCommandTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @dataProvider provideCommandData
      */
@@ -36,7 +39,7 @@ class FindMissingCommandTest extends TestCase
         $this->assertEquals($expectedExitCode, $exitCode);
 
         foreach ((array) $expectedMessages as $message) {
-            $this->assertContains($message, $tester->getDisplay());
+            $this->assertStringContainsString($message, $tester->getDisplay());
         }
     }
 

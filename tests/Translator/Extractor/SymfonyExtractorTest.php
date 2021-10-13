@@ -5,10 +5,13 @@ namespace Incenteev\TranslationCheckerBundle\Tests\Translator\Extractor;
 use Incenteev\TranslationCheckerBundle\Translator\Extractor\SymfonyExtractor;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Translation\MessageCatalogue;
 
 class SymfonyExtractorTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $workingDir;
 
     public function testExtract()
@@ -46,7 +49,7 @@ class SymfonyExtractorTest extends TestCase
         }
     }
 
-    protected function setup()
+    protected function setup(): void
     {
         parent::setup();
 
@@ -59,7 +62,7 @@ class SymfonyExtractorTest extends TestCase
         }
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         $this->clean();

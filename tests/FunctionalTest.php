@@ -10,12 +10,12 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class FunctionalTest extends KernelTestCase
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::deleteTmpDir();
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::deleteTmpDir();
     }

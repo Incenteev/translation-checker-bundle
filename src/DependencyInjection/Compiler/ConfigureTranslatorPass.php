@@ -19,12 +19,7 @@ class ConfigureTranslatorPass implements CompilerPassInterface
 
         $translatorDef = $container->findDefinition('translator.default');
 
-        // Symfony 3.3 added the default locale as third argument, before the loader ids and the options
-        if (is_string($translatorDef->getArgument(2))) {
-            $optionsArgumentIndex = 4;
-        } else {
-            $optionsArgumentIndex = 3;
-        }
+        $optionsArgumentIndex = 4;
 
         $options = $translatorDef->getArgument($optionsArgumentIndex);
 
