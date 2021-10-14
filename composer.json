@@ -12,12 +12,13 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "symfony/framework-bundle": "^4.4.29 || ^5.3.4",
         "symfony/console": "^4.4.29 || ^5.3.4",
         "symfony/config": "^4.4.29 || ^5.3.4",
         "symfony/dependency-injection": "^4.4.29 || ^5.3.4",
         "symfony/finder": "^4.4.29 || ^5.3.4",
+        "symfony/http-kernel": "^4.4.29 || ^5.3.4",
         "symfony/translation": "^4.4.32 || ^5.3.4",
         "symfony/yaml": "^4.4.29 || ^5.3.4"
     },
