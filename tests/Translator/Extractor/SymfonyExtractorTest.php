@@ -45,7 +45,7 @@ class SymfonyExtractorTest extends TestCase
             $symfonyExtractor->extract(Argument::exact($dir), Argument::exact($catalogue))->shouldHaveBeenCalled();
         }
         foreach ($nonDirPaths as $path) {
-            $symfonyExtractor->extract(Argument::exact($path), Argument::exact($catalogue))->shouldNotBeenCalled();
+            $symfonyExtractor->extract(Argument::exact($path), Argument::exact($catalogue))->shouldNotHaveBeenCalled();
         }
     }
 
