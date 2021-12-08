@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class TestKernel extends Kernel
 {
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         return array(
             new FrameworkBundle(),
@@ -18,7 +18,7 @@ class TestKernel extends Kernel
         );
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(function (ContainerBuilder $container) {
             $container->loadFromExtension('framework', array(
@@ -30,7 +30,7 @@ class TestKernel extends Kernel
         });
     }
 
-    public function getProjectDir()
+    public function getProjectDir(): string
     {
         // Fake implementation so that the old root_dir/Resources/translations and the new project_dir/translations both
         // map to the same folder in our fixture app to avoid getting a deprecation warning when running tests with 4.2+
@@ -38,12 +38,12 @@ class TestKernel extends Kernel
         return __DIR__.'/Resources';
     }
 
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return sys_get_temp_dir().'/incenteev_translation_checker';
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return $this->getCacheDir();
     }
