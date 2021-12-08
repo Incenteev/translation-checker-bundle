@@ -39,7 +39,7 @@ class FunctionalTest extends KernelTestCase
         $this->assertSame($expectedExitCode, $application->run($input, $output));
     }
 
-    public static function provideComparisonCases()
+    public static function provideComparisonCases(): iterable
     {
         return array(
             array('fr', true),
@@ -47,7 +47,7 @@ class FunctionalTest extends KernelTestCase
         );
     }
 
-    protected static function getKernelClass()
+    protected static function getKernelClass(): string
     {
         return 'Incenteev\TranslationCheckerBundle\Tests\FixtureApp\TestKernel';
     }
