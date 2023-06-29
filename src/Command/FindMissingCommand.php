@@ -11,6 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
 
+/**
+ * @final
+ */
 class FindMissingCommand extends Command
 {
     private $exposingTranslator;

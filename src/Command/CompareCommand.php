@@ -12,6 +12,9 @@ use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * @final
+ */
 class CompareCommand extends Command
 {
     private $exposingTranslator;

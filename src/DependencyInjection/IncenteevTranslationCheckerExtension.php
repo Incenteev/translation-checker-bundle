@@ -7,6 +7,9 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * @internal
+ */
 class IncenteevTranslationCheckerExtension extends ConfigurableExtension
 {
     public function loadInternal(array $config, ContainerBuilder $container)

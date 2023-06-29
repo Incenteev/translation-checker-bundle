@@ -7,6 +7,9 @@ use Incenteev\TranslationCheckerBundle\DependencyInjection\Compiler\ExtractorPas
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * @final
+ */
 class IncenteevTranslationCheckerBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
