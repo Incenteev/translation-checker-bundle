@@ -14,9 +14,14 @@ class CompareCommandTest extends TestCase
     use ProphecyTrait;
 
     /**
+     * @param array<string, array<string, string>> $sourceMessages
+     * @param array<string, array<string, string>> $comparedMessages
+     * @param array<string, mixed> $input
+     * @param string|string[] $expectedMessages
+     *
      * @dataProvider provideCommandData
      */
-    public function testExecute($sourceLocale, array $sourceMessages, $comparedLocale, array $comparedMessages, array $input, $expectedExitCode, $expectedMessages, $verbosity = OutputInterface::VERBOSITY_NORMAL)
+    public function testExecute(string $sourceLocale, array $sourceMessages, string $comparedLocale, array $comparedMessages, array $input, int $expectedExitCode, $expectedMessages, int $verbosity = OutputInterface::VERBOSITY_NORMAL)
     {
         $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
 
@@ -35,7 +40,7 @@ class CompareCommandTest extends TestCase
         }
     }
 
-    public function provideCommandData()
+    public function provideCommandData(): iterable
     {
         return array(
             'sync with en' => array(

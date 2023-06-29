@@ -7,20 +7,22 @@ use Symfony\Component\Translation\MessageCatalogue;
 
 class JsExtractor implements ExtractorInterface
 {
-    private $paths;
-    private $defaultDomain;
+    /**
+     * @var string[]
+     */
+    private array $paths;
+    private string $defaultDomain;
 
     /**
      * @param string[] $paths
-     * @param string   $defaultDomain
      */
-    public function __construct(array $paths, $defaultDomain)
+    public function __construct(array $paths, string $defaultDomain)
     {
         $this->paths = $paths;
         $this->defaultDomain = $defaultDomain;
     }
 
-    public function extract(MessageCatalogue $catalogue)
+    public function extract(MessageCatalogue $catalogue): void
     {
         $directories = array();
 
@@ -32,7 +34,12 @@ class JsExtractor implements ExtractorInterface
             }
 
             if (is_file($path)) {
-                $this->extractTranslations($catalogue, file_get_contents($path));
+                $contents = file_get_contents($path);
+                if ($contents === false) {
+                    throw new \RuntimeException(sprintf('Failed to read the file "%s"', $path));
+                }
+
+                $this->extractTranslations($catalogue, $contents);
             }
         }
 
@@ -49,7 +56,7 @@ class JsExtractor implements ExtractorInterface
         }
     }
 
-    private function extractTranslations(MessageCatalogue $catalogue, $fileContent)
+    private function extractTranslations(MessageCatalogue $catalogue, string $fileContent): void
     {
         $pattern = <<<REGEXP
 /

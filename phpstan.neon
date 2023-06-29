@@ -1,0 +1,17 @@
+parameters:
+    level: 8
+    paths:
+        - src/
+        - tests/
+    ignoreErrors:
+        - '#^Method Incenteev\\TranslationCheckerBundle\\Tests\\[^:]++\:\:test\w++\(\) has no return type specified\.$#'
+        - '#^Method Incenteev\\TranslationCheckerBundle\\Tests\\[^:]++\:\:provide\w++\(\) return type has no value type specified in iterable type iterable\.$#'
+    symfony:
+        consoleApplicationLoader: tests/FixtureApp/console.php
+
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/jangregor/phpstan-prophecy/extension.neon

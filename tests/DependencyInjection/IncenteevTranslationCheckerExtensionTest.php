@@ -130,10 +130,9 @@ class IncenteevTranslationCheckerExtensionTest extends TestCase
     }
 
     /**
-     * @param mixed  $value
-     * @param string $key
+     * @param mixed $value
      */
-    private function assertParameter($value, $key)
+    private function assertParameter($value, string $key): void
     {
         $this->assertEquals($value, $this->containerBuilder->getParameter($key), sprintf('%s parameter is correct', $key));
     }

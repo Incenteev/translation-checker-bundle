@@ -77,7 +77,7 @@ class ExtractorPassTest extends TestCase
         $this->assertTrue($alias->isPublic());
     }
 
-    private function createContainerBuilder()
+    private function createContainerBuilder(): ContainerBuilder
     {
         $container = new ContainerBuilder();
         $container->register('incenteev_translation_checker.extractor.chain', 'Incenteev\TranslationCheckerBundle\Translator\Extractor\ChainExtractor')

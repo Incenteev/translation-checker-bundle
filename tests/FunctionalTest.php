@@ -2,6 +2,7 @@
 
 namespace Incenteev\TranslationCheckerBundle\Tests;
 
+use Incenteev\TranslationCheckerBundle\Tests\FixtureApp\TestKernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -23,7 +24,7 @@ class FunctionalTest extends KernelTestCase
     /**
      * @dataProvider provideComparisonCases
      */
-    public function testCompareCommand($locale, $valid)
+    public function testCompareCommand(string $locale, bool $valid)
     {
         self::bootKernel();
 
@@ -49,10 +50,10 @@ class FunctionalTest extends KernelTestCase
 
     protected static function getKernelClass(): string
     {
-        return 'Incenteev\TranslationCheckerBundle\Tests\FixtureApp\TestKernel';
+        return TestKernel::class;
     }
 
-    private static function deleteTmpDir()
+    private static function deleteTmpDir(): void
     {
         if (!file_exists($dir = sys_get_temp_dir().'/incenteev_translation_checker')) {
             return;

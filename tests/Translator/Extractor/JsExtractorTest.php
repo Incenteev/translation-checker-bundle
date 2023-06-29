@@ -11,7 +11,7 @@ class JsExtractorTest extends TestCase
     /**
      * @dataProvider providePaths
      */
-    public function testExtraction($path)
+    public function testExtraction(string $path)
     {
         $extractor = new JsExtractor(array($path), 'js');
         $catalogue = new MessageCatalogue('en');
@@ -36,7 +36,7 @@ class JsExtractorTest extends TestCase
         $this->assertEqualsCanonicalizing($expected, $catalogue->all());// Order of translations is not relevant for the testing
     }
 
-    public static function providePaths()
+    public static function providePaths(): iterable
     {
         return array(
             'directory' => array(__DIR__.'/fixtures'),

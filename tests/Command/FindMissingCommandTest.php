@@ -15,9 +15,13 @@ class FindMissingCommandTest extends TestCase
     use ProphecyTrait;
 
     /**
+     * @param array<string, array<string, string>> $sourceMessages
+     * @param array<string, array<string, string>> $extractedMessages
+     * @param string|string[] $expectedMessages
+     *
      * @dataProvider provideCommandData
      */
-    public function testExecute($locale, array $sourceMessages, array $extractedMessages, $expectedExitCode, $expectedMessages, $verbosity = OutputInterface::VERBOSITY_NORMAL)
+    public function testExecute(string $locale, array $sourceMessages, array $extractedMessages, int $expectedExitCode, $expectedMessages, int $verbosity = OutputInterface::VERBOSITY_NORMAL)
     {
         $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
         $extractor = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface');
@@ -43,7 +47,7 @@ class FindMissingCommandTest extends TestCase
         }
     }
 
-    public function provideCommandData()
+    public function provideCommandData(): iterable
     {
         return array(
             'sync with en' => array(

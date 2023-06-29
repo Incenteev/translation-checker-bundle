@@ -16,8 +16,8 @@ use Symfony\Component\Translation\MessageCatalogue;
  */
 class FindMissingCommand extends Command
 {
-    private $exposingTranslator;
-    private $extractor;
+    private ExposingTranslator $exposingTranslator;
+    private ExtractorInterface $extractor;
 
     public function __construct(ExposingTranslator $exposingTranslator, ExtractorInterface $extractor)
     {
