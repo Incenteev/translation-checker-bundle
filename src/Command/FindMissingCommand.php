@@ -11,6 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
 
+/**
+ * @final
+ */
 class FindMissingCommand extends Command
 {
     private $exposingTranslator;
@@ -23,7 +26,7 @@ class FindMissingCommand extends Command
         $this->extractor = $extractor;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('incenteev:translation:find-missing')
             ->setDescription('Finds the missing translations in a catalogue')

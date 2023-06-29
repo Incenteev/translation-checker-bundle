@@ -12,6 +12,9 @@ use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * @final
+ */
 class CompareCommand extends Command
 {
     private $exposingTranslator;
@@ -23,7 +26,7 @@ class CompareCommand extends Command
         $this->exposingTranslator = $exposingTranslator;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('incenteev:translation:compare')
             ->setDescription('Compares two translation catalogues to ensure they are in sync')
