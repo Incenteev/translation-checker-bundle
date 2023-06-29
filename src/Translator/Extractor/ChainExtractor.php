@@ -6,6 +6,9 @@ use Symfony\Component\Translation\MessageCatalogue;
 
 final class ChainExtractor implements ExtractorInterface
 {
+    /**
+     * @var ExtractorInterface[]
+     */
     private $extractors;
 
     /**

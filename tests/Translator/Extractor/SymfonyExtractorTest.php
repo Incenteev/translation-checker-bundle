@@ -12,7 +12,7 @@ class SymfonyExtractorTest extends TestCase
 {
     use ProphecyTrait;
 
-    private $workingDir;
+    private string $workingDir;
 
     public function testExtract()
     {
@@ -69,9 +69,9 @@ class SymfonyExtractorTest extends TestCase
         rmdir($this->workingDir);
     }
 
-    private function clean()
+    private function clean(): void
     {
-        foreach (glob($this->workingDir.'/*') as $file) {
+        foreach (glob($this->workingDir.'/*') ?: [] as $file) {
             if (is_dir($file)) {
                 @rmdir($file);
             } else {

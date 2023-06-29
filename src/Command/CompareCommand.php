@@ -17,7 +17,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class CompareCommand extends Command
 {
-    private $exposingTranslator;
+    private ExposingTranslator $exposingTranslator;
 
     public function __construct(ExposingTranslator $exposingTranslator)
     {
@@ -86,13 +86,14 @@ EOF
                 return 1;
             }
 
-            $whitelist = Yaml::parse(file_get_contents($whitelistFile));
+            $whitelist = Yaml::parseFile($whitelistFile);
 
             if (!is_array($whitelist)) {
                 $output->writeln(sprintf('<error>The whitelist file "%s" is invalid. It must be a Yaml file containing a map.</error>', $whitelistFile));
 
                 return 1;
             }
+            /** @var array<string, string[]> $whitelist */
         }
 
         $valid = true;
@@ -142,7 +143,10 @@ EOF
         return 1;
     }
 
-    private function displayMessages(OutputInterface $output, array $messages)
+    /**
+     * @param array<string, string> $messages
+     */
+    private function displayMessages(OutputInterface $output, array $messages): void
     {
         if ($output->getVerbosity() < OutputInterface::VERBOSITY_VERBOSE) {
             return;

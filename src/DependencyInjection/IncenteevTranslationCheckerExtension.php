@@ -2,6 +2,7 @@
 
 namespace Incenteev\TranslationCheckerBundle\DependencyInjection;
 
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
@@ -12,6 +13,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class IncenteevTranslationCheckerExtension extends ConfigurableExtension
 {
+    /**
+     * @param array<string, mixed> $config
+     */
     public function loadInternal(array $config, ContainerBuilder $container): void
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -28,6 +32,7 @@ class IncenteevTranslationCheckerExtension extends ConfigurableExtension
         }
         $overridePathPatterns[] = '%%kernel.project_dir%%/templates/bundles/%s';
 
+        /** @var array<string, class-string<BundleInterface>> $registeredBundles */
         $registeredBundles = $container->getParameter('kernel.bundles');
 
         foreach ($config['extraction']['bundles'] as $bundle) {
@@ -36,6 +41,11 @@ class IncenteevTranslationCheckerExtension extends ConfigurableExtension
             }
 
             $reflection = new \ReflectionClass($registeredBundles[$bundle]);
+
+            if (false === $reflection->getFilename()) {
+                continue;
+            }
+
             $dirs[] = dirname($reflection->getFilename()).'/Resources/views';
 
             foreach ($overridePathPatterns as $overridePath) {
