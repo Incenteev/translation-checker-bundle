@@ -24,6 +24,7 @@ class TestKernel extends Kernel
             $container->loadFromExtension('framework', array(
                 'translator' => array('fallback' => 'en'),
                 'secret' => 'test',
+                'http_method_override' => false,
             ));
             // Register a NullLogger to avoid getting the stderr default logger of FrameworkBundle
             $container->register('logger', 'Psr\Log\NullLogger');

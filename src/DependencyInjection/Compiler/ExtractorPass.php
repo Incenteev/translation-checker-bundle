@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 final class ExtractorPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $extractors = array();
 

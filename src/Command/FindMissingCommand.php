@@ -26,7 +26,7 @@ class FindMissingCommand extends Command
         $this->extractor = $extractor;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('incenteev:translation:find-missing')
             ->setDescription('Finds the missing translations in a catalogue')

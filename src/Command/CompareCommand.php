@@ -26,7 +26,7 @@ class CompareCommand extends Command
         $this->exposingTranslator = $exposingTranslator;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('incenteev:translation:compare')
             ->setDescription('Compares two translation catalogues to ensure they are in sync')
