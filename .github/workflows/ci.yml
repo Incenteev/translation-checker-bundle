@@ -9,22 +9,22 @@ jobs:
         name: Check composer.json
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - uses: shivammathur/setup-php@v2
               with:
                   coverage: none
-                  php-version: '8.0'
+                  php-version: '8.3'
             - run: composer validate --strict --no-check-lock
 
     static_analysis:
         name: Static analysis
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - uses: shivammathur/setup-php@v2
               with:
                   coverage: none
-                  php-version: '8.1'
+                  php-version: '8.3'
             - name: Install dependencies
               run: composer update --ansi --no-progress --prefer-dist --no-interaction
             - run: vendor/bin/phpstan analyze
@@ -36,12 +36,12 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.4', '8.0', '8.1', '8.2' ]
+                php: [ '7.4', '8.0', '8.1', '8.2', '8.3' ]
                 min_stability: [ '' ]
                 name_suffix: [ '' ]
                 composer_flags: [ '' ]
                 include:
-                    - php: '8.0'
+                    - php: '8.3'
                       min_stability: 'dev'
                       name_suffix: ' (dev deps)'
                     - php: '7.4'
@@ -50,11 +50,12 @@ jobs:
                       composer_flags: '--prefer-lowest'
 
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
             -   uses: shivammathur/setup-php@v2
                 with:
                     coverage: "none"
                     php-version: "${{ matrix.php }}"
+                    ini-file: development
 
             -   name: Configure stability
                 if: "matrix.min_stability != ''"
