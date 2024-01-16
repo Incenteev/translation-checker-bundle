@@ -8,6 +8,7 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Translation\MessageCatalogue;
+use Symfony\Component\Translation\TranslatorBagInterface;
 
 class CompareCommandTest extends TestCase
 {
@@ -23,7 +24,7 @@ class CompareCommandTest extends TestCase
      */
     public function testExecute(string $sourceLocale, array $sourceMessages, string $comparedLocale, array $comparedMessages, array $input, int $expectedExitCode, $expectedMessages, int $verbosity = OutputInterface::VERBOSITY_NORMAL)
     {
-        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+        $loader = $this->prophesize(TranslatorBagInterface::class);
 
         $loader->getCatalogue($sourceLocale)->willReturn(new MessageCatalogue($sourceLocale, $sourceMessages));
         $loader->getCatalogue($comparedLocale)->willReturn(new MessageCatalogue($comparedLocale, $comparedMessages));
@@ -150,7 +151,7 @@ class CompareCommandTest extends TestCase
 
     public function testFailsForNonExistentWhitelist()
     {
-        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+        $loader = $this->prophesize(TranslatorBagInterface::class);
 
         $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('messages' => array('foo' => 'bar'))));
         $loader->getCatalogue('fr')->willReturn(new MessageCatalogue('fr', array('messages' => array('foo' => 'baz'))));
@@ -167,7 +168,7 @@ class CompareCommandTest extends TestCase
 
     public function testFailsForInvalidWhitelist()
     {
-        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+        $loader = $this->prophesize(TranslatorBagInterface::class);
 
         $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('messages' => array('foo' => 'bar'))));
         $loader->getCatalogue('fr')->willReturn(new MessageCatalogue('fr', array('messages' => array('foo' => 'baz'))));
@@ -184,7 +185,7 @@ class CompareCommandTest extends TestCase
 
     public function testSucceedWithWhitelistedMessages()
     {
-        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+        $loader = $this->prophesize(TranslatorBagInterface::class);
 
         $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('incenteev_tests' => array('foo' => 'bar', 'this key can go missing' => 'not defined in fr'))));
         $loader->getCatalogue('fr')->willReturn(new MessageCatalogue('fr', array('incenteev_tests' => array('foo' => 'baz', 'this.one.also' => 'obsolete... or no'))));
@@ -199,7 +200,7 @@ class CompareCommandTest extends TestCase
 
     public function testFailsWithWhitelistedMessagesAndMissingMessage()
     {
-        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+        $loader = $this->prophesize(TranslatorBagInterface::class);
 
         $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('incenteev_tests' => array(
             'foo' => 'bar',
@@ -220,7 +221,7 @@ class CompareCommandTest extends TestCase
 
     public function testWhitelistIsDomainBased()
     {
-        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+        $loader = $this->prophesize(TranslatorBagInterface::class);
 
         $loader->getCatalogue('en')->willReturn(new MessageCatalogue('en', array('messages' => array('foo' => 'bar', 'this key can go missing' => 'not defined in fr'))));
         $loader->getCatalogue('fr')->willReturn(new MessageCatalogue('fr', array('messages' => array('foo' => 'baz', 'this.one.also' => 'obsolete... or no'))));

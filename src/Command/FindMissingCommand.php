@@ -2,7 +2,6 @@
 
 namespace Incenteev\TranslationCheckerBundle\Command;
 
-use Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator;
 use Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -10,16 +9,17 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
+use Symfony\Component\Translation\TranslatorBagInterface;
 
 /**
  * @final
  */
 class FindMissingCommand extends Command
 {
-    private ExposingTranslator $exposingTranslator;
+    private TranslatorBagInterface $exposingTranslator;
     private ExtractorInterface $extractor;
 
-    public function __construct(ExposingTranslator $exposingTranslator, ExtractorInterface $extractor)
+    public function __construct(TranslatorBagInterface $exposingTranslator, ExtractorInterface $extractor)
     {
         parent::__construct();
         $this->exposingTranslator = $exposingTranslator;

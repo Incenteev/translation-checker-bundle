@@ -26,9 +26,9 @@ class FunctionalTest extends KernelTestCase
      */
     public function testCompareCommand(string $locale, bool $valid)
     {
-        self::bootKernel();
+        $kernel = self::bootKernel();
 
-        $application = new Application(self::$kernel);
+        $application = new Application($kernel);
         $application->setAutoExit(false);
         $application->setCatchExceptions(false);
 
@@ -45,9 +45,9 @@ class FunctionalTest extends KernelTestCase
      */
     public function testCompareCommandWithIcuTranslations(string $locale, bool $valid)
     {
-        self::bootKernel();
+        $kernel = self::bootKernel();
 
-        $application = new Application(self::$kernel);
+        $application = new Application($kernel);
         $application->setAutoExit(false);
         $application->setCatchExceptions(false);
 

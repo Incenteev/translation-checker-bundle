@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="incenteev_translation_checker.exposing_translator" class="Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator" parent="translator.default">
+        <service id="incenteev_translation_checker.exposing_translator" parent="translator.default">
             <call method="setFallbackLocales">
                 <argument type="collection" />
             </call>

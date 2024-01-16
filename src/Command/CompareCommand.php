@@ -2,7 +2,6 @@
 
 namespace Incenteev\TranslationCheckerBundle\Command;
 
-use Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,6 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Translation\Catalogue\TargetOperation;
 use Symfony\Component\Translation\MessageCatalogue;
+use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -17,9 +17,9 @@ use Symfony\Component\Yaml\Yaml;
  */
 class CompareCommand extends Command
 {
-    private ExposingTranslator $exposingTranslator;
+    private TranslatorBagInterface $exposingTranslator;
 
-    public function __construct(ExposingTranslator $exposingTranslator)
+    public function __construct(TranslatorBagInterface $exposingTranslator)
     {
         parent::__construct();
 
