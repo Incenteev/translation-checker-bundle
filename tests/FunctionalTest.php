@@ -40,6 +40,25 @@ class FunctionalTest extends KernelTestCase
         $this->assertSame($expectedExitCode, $application->run($input, $output));
     }
 
+    /**
+     * @dataProvider provideComparisonCases
+     */
+    public function testCompareCommandWithIcuTranslations(string $locale, bool $valid)
+    {
+        self::bootKernel();
+
+        $application = new Application(self::$kernel);
+        $application->setAutoExit(false);
+        $application->setCatchExceptions(false);
+
+        $input = new ArrayInput(array('command' => 'incenteev:translation:compare', 'locale' => $locale, '-d' => array('test_icu')));
+        $output = new NullOutput();
+
+        $expectedExitCode = $valid ? 0 : 1;
+
+        $this->assertSame($expectedExitCode, $application->run($input, $output));
+    }
+
     public static function provideComparisonCases(): iterable
     {
         return array(
