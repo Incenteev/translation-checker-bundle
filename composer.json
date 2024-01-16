@@ -2,7 +2,7 @@
     "name": "incenteev/translation-checker-bundle",
     "type": "symfony-bundle",
     "description": "CLI tools to check translations in a Symfony project",
-    "keywords": ["translation check", "translation"],
+    "keywords": ["translation check", "translation", "testing"],
     "homepage": "https://github.com/Incenteev/translation-checker-bundle",
     "license": "MIT",
     "authors": [
