@@ -20,7 +20,7 @@
         "symfony/finder": "^4.4.29 || ^5.3.4 || ^6.0.0 || ^7.0.0",
         "symfony/http-kernel": "^4.4.29 || ^5.3.4 || ^6.0.0 || ^7.0.0",
         "symfony/translation": "^4.4.32 || ^5.3.4 || ^6.0.0 || ^7.0.0",
-        "symfony/yaml": "^4.4.29 || ^5.3.4 || ^6.0.0"
+        "symfony/yaml": "^4.4.29 || ^5.3.4 || ^6.0.0 || ^7.0.0"
     },
     "require-dev": {
         "jangregor/phpstan-prophecy": "^1.0",
