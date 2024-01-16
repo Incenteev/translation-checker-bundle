@@ -2,6 +2,7 @@
 
 namespace Incenteev\TranslationCheckerBundle\Tests\FixtureApp;
 
+use Composer\InstalledVersions;
 use Incenteev\TranslationCheckerBundle\IncenteevTranslationCheckerBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -25,7 +26,13 @@ class TestKernel extends Kernel
                 'translator' => array('fallback' => 'en'),
                 'secret' => 'test',
                 'http_method_override' => false,
+                'php_errors' => ['log' => false],
             ));
+            if (version_compare(InstalledVersions::getVersion('symfony/framework-bundle') ?? '2.0.0', '6.2.0', '>=')) {
+                $container->loadFromExtension('framework', [
+                    'handle_all_throwables' => true,
+                ]);
+            }
             // Register a NullLogger to avoid getting the stderr default logger of FrameworkBundle
             $container->register('logger', 'Psr\Log\NullLogger');
         });
