@@ -9,6 +9,7 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Translation\MessageCatalogue;
+use Symfony\Component\Translation\TranslatorBagInterface;
 
 class FindMissingCommandTest extends TestCase
 {
@@ -23,7 +24,7 @@ class FindMissingCommandTest extends TestCase
      */
     public function testExecute(string $locale, array $sourceMessages, array $extractedMessages, int $expectedExitCode, $expectedMessages, int $verbosity = OutputInterface::VERBOSITY_NORMAL)
     {
-        $loader = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\ExposingTranslator');
+        $loader = $this->prophesize(TranslatorBagInterface::class);
         $extractor = $this->prophesize('Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface');
 
         $loader->getCatalogue($locale)->willReturn(new MessageCatalogue($locale, $sourceMessages));
