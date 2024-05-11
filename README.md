@@ -20,7 +20,7 @@ Installation is a quick (I promise!) 2 step process:
 Run the following composer require command:
 
 ```bash
-$ composer require incenteev/translation-checker-bundle
+composer require incenteev/translation-checker-bundle
 ```
 
 ### Step 2: Enable the bundle
@@ -48,7 +48,7 @@ public function registerBundles()
 The bundle provides a few CLI commands. To list them all, run:
 
 ```bash
-$ bin/console list incenteev:translation
+bin/console list incenteev:translation
 ```
 
 All commands display a summary only by default. Run then in verbose mode
