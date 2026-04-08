@@ -36,7 +36,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.4', '8.0', '8.1', '8.2', '8.3' ]
+                php: [ '8.2', '8.3' ]
                 min_stability: [ '' ]
                 name_suffix: [ '' ]
                 composer_flags: [ '' ]
@@ -44,7 +44,7 @@ jobs:
                     - php: '8.3'
                       min_stability: 'dev'
                       name_suffix: ' (dev deps)'
-                    - php: '7.4'
+                    - php: '8.2'
                       min_stability: ''
                       name_suffix: ' (lowest deps)'
                       composer_flags: '--prefer-lowest'
