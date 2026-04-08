@@ -28,8 +28,10 @@
         "phpstan/phpstan": "^2.1.46",
         "phpstan/phpstan-phpunit": "^2.0.16",
         "phpstan/phpstan-symfony": "^2.0.15",
-        "phpunit/phpunit": "^9.6.15",
-        "symfony/phpunit-bridge": "^6.4.0 || ^7.0.0",
+        "phpunit/phpunit": "^11.5.55 || ^12.5.17 || ^13.1.1",
+        "symfony/error-handler": "^6.4.0 || ^7.0.0",
+        "symfony/phpunit-bridge": "^7.4.0",
+        "symfony/runtime": "^6.4.0 || ^7.0.0",
         "webmozart/assert": "^2.1"
     },
     "autoload": {
@@ -41,6 +43,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.x-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/runtime": false
         }
     }
 }

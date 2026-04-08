@@ -3,6 +3,7 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\Command;
 
 use Incenteev\TranslationCheckerBundle\Command\FindMissingCommand;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -19,9 +20,8 @@ class FindMissingCommandTest extends TestCase
      * @param array<string, array<string, string>> $sourceMessages
      * @param array<string, array<string, string>> $extractedMessages
      * @param string|string[] $expectedMessages
-     *
-     * @dataProvider provideCommandData
      */
+    #[DataProvider('provideCommandData')]
     public function testExecute(string $locale, array $sourceMessages, array $extractedMessages, int $expectedExitCode, $expectedMessages, int $verbosity = OutputInterface::VERBOSITY_NORMAL)
     {
         $loader = $this->prophesize(TranslatorBagInterface::class);
@@ -48,7 +48,7 @@ class FindMissingCommandTest extends TestCase
         }
     }
 
-    public function provideCommandData(): iterable
+    public static function provideCommandData(): iterable
     {
         return array(
             'sync with en' => array(

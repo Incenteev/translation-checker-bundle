@@ -3,6 +3,7 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\Command;
 
 use Incenteev\TranslationCheckerBundle\Command\CompareCommand;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,9 +20,8 @@ class CompareCommandTest extends TestCase
      * @param array<string, array<string, string>> $comparedMessages
      * @param array<string, mixed> $input
      * @param string|string[] $expectedMessages
-     *
-     * @dataProvider provideCommandData
      */
+    #[DataProvider('provideCommandData')]
     public function testExecute(string $sourceLocale, array $sourceMessages, string $comparedLocale, array $comparedMessages, array $input, int $expectedExitCode, $expectedMessages, int $verbosity = OutputInterface::VERBOSITY_NORMAL)
     {
         $loader = $this->prophesize(TranslatorBagInterface::class);
@@ -41,7 +41,7 @@ class CompareCommandTest extends TestCase
         }
     }
 
-    public function provideCommandData(): iterable
+    public static function provideCommandData(): iterable
     {
         return array(
             'sync with en' => array(

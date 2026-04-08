@@ -3,14 +3,13 @@
 namespace Incenteev\TranslationCheckerBundle\Tests\Translator\Extractor;
 
 use Incenteev\TranslationCheckerBundle\Translator\Extractor\JsExtractor;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Translation\MessageCatalogue;
 
 class JsExtractorTest extends TestCase
 {
-    /**
-     * @dataProvider providePaths
-     */
+    #[DataProvider('providePaths')]
     public function testExtraction(string $path)
     {
         $extractor = new JsExtractor(array($path), 'js');

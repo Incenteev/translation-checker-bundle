@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" bootstrap="vendor/autoload.php" xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd">
-    <coverage>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         colors="true"
+         bootstrap="vendor/autoload.php"
+         failOnDeprecation="true"
+         failOnWarning="true"
+         failOnNotice="true"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd">
+    <testsuites>
+        <testsuite name="IncenteevTranslationCheckerBundle Test Suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <source ignoreSuppressionOfDeprecations="true">
         <include>
             <directory>./src</directory>
         </include>
         <exclude>
             <directory>./src/Resources</directory>
         </exclude>
-    </coverage>
-    <testsuites>
-        <testsuite name="IncenteevTranslationCheckerBundle Test Suite">
-            <directory suffix="Test.php">./tests</directory>
-        </testsuite>
-    </testsuites>
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
-    </listeners>
+        <deprecationTrigger>
+            <function>trigger_deprecation</function>
+        </deprecationTrigger>
+    </source>
+
+    <extensions>
+        <bootstrap class="Symfony\Bridge\PhpUnit\SymfonyExtension"/>
+    </extensions>
 </phpunit>

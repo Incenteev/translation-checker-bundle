@@ -3,6 +3,7 @@
 namespace Incenteev\TranslationCheckerBundle\Tests;
 
 use Incenteev\TranslationCheckerBundle\Tests\FixtureApp\TestKernel;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -21,9 +22,7 @@ class FunctionalTest extends KernelTestCase
         self::deleteTmpDir();
     }
 
-    /**
-     * @dataProvider provideComparisonCases
-     */
+    #[DataProvider('provideComparisonCases')]
     public function testCompareCommand(string $locale, bool $valid)
     {
         $kernel = self::bootKernel();
@@ -40,9 +39,7 @@ class FunctionalTest extends KernelTestCase
         $this->assertSame($expectedExitCode, $application->run($input, $output));
     }
 
-    /**
-     * @dataProvider provideComparisonCases
-     */
+    #[DataProvider('provideComparisonCases')]
     public function testCompareCommandWithIcuTranslations(string $locale, bool $valid)
     {
         $kernel = self::bootKernel();
