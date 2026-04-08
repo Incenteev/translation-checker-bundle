@@ -2,9 +2,9 @@
 
 namespace Incenteev\TranslationCheckerBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -18,8 +18,8 @@ class IncenteevTranslationCheckerExtension extends ConfigurableExtension
      */
     public function loadInternal(array $config, ContainerBuilder $container): void
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.php');
 
         $container->registerForAutoconfiguration('Incenteev\TranslationCheckerBundle\Translator\Extractor\ExtractorInterface')
             ->addTag('incenteev_translation_checker.extractor');
