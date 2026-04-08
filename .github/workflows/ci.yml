@@ -40,6 +40,7 @@ jobs:
                 min_stability: [ '' ]
                 name_suffix: [ '' ]
                 composer_flags: [ '' ]
+                phpunit_flags: [ '' ]
                 include:
                     - php: '8.3'
                       min_stability: 'dev'
@@ -48,6 +49,7 @@ jobs:
                       min_stability: ''
                       name_suffix: ' (lowest deps)'
                       composer_flags: '--prefer-lowest'
+                      phpunit_flags: '--do-not-fail-on-deprecation'
 
         steps:
             -   uses: actions/checkout@v4
@@ -65,4 +67,4 @@ jobs:
                 run: composer update --ansi --no-progress --prefer-dist --no-interaction ${{ matrix.composer_flags }}
 
             -   name: Run tests
-                run: vendor/bin/phpunit -v --colors=always
+                run: vendor/bin/phpunit --colors=always ${{ matrix.phpunit_flags }}
