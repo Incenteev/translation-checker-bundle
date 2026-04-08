@@ -5,7 +5,6 @@ parameters:
         - tests/
     ignoreErrors:
         - '#^Method Incenteev\\TranslationCheckerBundle\\Tests\\[^:]++\:\:test\w++\(\) has no return type specified\.$#'
-        - '#^Method Incenteev\\TranslationCheckerBundle\\Tests\\[^:]++\:\:provide\w++\(\) return type has no value type specified in iterable type iterable\.$#'
     symfony:
         consoleApplicationLoader: tests/FixtureApp/console.php
 
